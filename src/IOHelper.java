@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import static java.lang.String.valueOf;
 import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 
 /*
@@ -51,7 +52,7 @@ public class IOHelper {
                 Path file = selectedFile.toPath();
 
                 //InputStream is needed in order to create our Buffered Reader
-                //InputStream allows bytes of data to be read from a file
+                //InputStream allows bytes of data.txt to be read from a file
                 //BufferedReader is our actual "reader" tool that will be used to read characters from file
                 InputStream in = new BufferedInputStream(Files.newInputStream(file, CREATE));
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -65,7 +66,7 @@ public class IOHelper {
                     list.add(rec);
                 }
                 reader.close(); // must close the file to seal it and clear buffer
-                System.out.println("\n\nData file opened!"); //Success message
+                System.out.println("Data file opened!"); //Success message
                 return file.getFileName().toString();
             } else {
                 //This else statement is hit when the user closes the JFileChooser Wizard without selecting file
@@ -92,10 +93,10 @@ public class IOHelper {
         * Allows the user to store the contents of the ArrayList in a txt file
         * User must pass in the ArrayList that is being written to the txt file as a parameter
         * User must pass in the name of file that they are writing
-        * You can think of this method as "saving" your data
+        * You can think of this method as "saving" your data.txt
     */
     public static void writeFile(ArrayList<String> list, String name) throws IOException{
-        //Sample data that is being added to an ArrayList named recs
+        //Sample data.txt that is being added to an ArrayList named recs
         ArrayList<String> recs = list;
         String fileName = name;
 
@@ -110,18 +111,18 @@ public class IOHelper {
         //If an error occurs in this block, the catch block will handle the IO Exception
         try {
             //OutputStream is needed in order to create our Buffered Writer
-            //OutputStream allows bytes of data to be written to a file
+            //OutputStream allows bytes of data.txt to be written to a file
             //BufferedWriter is our actual writing tool that will be used to write characters to file
-            OutputStream out = new BufferedOutputStream(Files.newOutputStream(file, CREATE));
+            OutputStream out = new BufferedOutputStream(Files.newOutputStream(file, CREATE, TRUNCATE_EXISTING));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
 
-            //Actually writing data from recs to new file
+            //Actually writing data.txt from recs to new file
             for (String r : recs) {
                 //r is the String being written
                 //0 is the index of the String the writer starts writing at
                 //r.length is the index of the String the writer stops writing at
                 writer.write(r, 0, r.length());
-                //need new line added before we write more data - ensures next bit of data is put on own line
+                //need new line added before we write more data.txt - ensures next bit of data.txt is put on own line
                 writer.newLine();
             }
             writer.close(); //closes file and clears buffer

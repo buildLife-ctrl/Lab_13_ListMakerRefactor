@@ -151,10 +151,8 @@ public class InputHelper {
             input = scan.nextLine();
             if (input.equalsIgnoreCase("y")) {
                 confirm = true;
-                System.out.println(confirm);
                 check = true;
             } else if (input.equalsIgnoreCase("n")) {
-                System.out.println(confirm);
                 check = true;
             } else {
                 System.out.println("Invalid input, please try again.");
